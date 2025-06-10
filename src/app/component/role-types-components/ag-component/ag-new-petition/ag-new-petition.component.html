@@ -1,0 +1,366 @@
+<!-- ag-new-petition.component.html -->
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Advocate Information -->
+    <div class="section">
+      <div class="section-header">
+        <h3>Petitioner Advocate Information</h3>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Advocate Name <span style="color: red;">*</span></label>
+          <input type="text" formControlName="pet_adv" required />
+          <div *ngIf="form.get('pet_adv')?.invalid && form.get('pet_adv')?.touched" class="error-message">
+            Advocate name is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>AUIN Number <span style="color: red;">*</span></label>
+          <input type="text" formControlName="pet_adv_cd" required />
+          <div *ngIf="form.get('pet_adv_cd')?.invalid && form.get('pet_adv_cd')?.touched" class="error-message">
+            AUIN number is required
+          </div>
+        </div>
+       <div class="form-group">
+  <label>Mobile Number</label>
+<input
+  type="text"
+  formControlName="pet_adv_mobile"
+  maxlength="10"
+  (keypress)="restrictInput($event)"
+  (input)="limitDigits($event)"
+/>
+
+
+
+  <div
+    *ngIf="form.get('pet_adv_mobile')?.invalid && form.get('pet_adv_mobile')?.touched"
+    class="error-message"
+  >
+    Mobile number must start with 6-9 and be 10 digits
+  </div>
+</div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" formControlName="pet_adv_add" />
+        </div>
+        <div class="form-group">
+          <label>Case Subject</label>
+          <input type="text" formControlName="subject" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Basic Case Information -->
+    <div class="section">
+      <div class="section-header">
+        <h3>Basic Information of Case</h3>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Case Type <span style="color: red;">*</span></label>
+          <ng-select 
+            formControlName="ci_cri"
+            [items]="caseTypes"
+            bindLabel="name"
+            bindValue="value"
+            placeholder="-- Select Case Type --"
+            [searchable]="true"
+            required>
+          </ng-select>
+          <div *ngIf="form.get('ci_cri')?.invalid && form.get('ci_cri')?.touched" class="error-message">
+            Case type is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nature of Case <span style="color: red;">*</span></label>
+          <ng-select 
+            formControlName="regcase_type"
+            [items]="caseNatures"
+            bindLabel="case_type"
+            bindValue="type_flag"
+            placeholder="-- Select Nature of Case --"
+            [searchable]="true"
+            required>
+          </ng-select>
+          <div *ngIf="form.get('regcase_type')?.invalid && form.get('regcase_type')?.touched" class="error-message">
+            Nature of case is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Arising out of</label>
+          <input type="text" formControlName="ariser_from" />
+        </div>
+         <div class="form-group">
+          <label>Arise of Case Number</label>
+          <input type="text" formControlName="arisereg_no" />
+        </div>
+        <div class="form-group">
+          <label>Year</label>
+          <ng-select 
+            formControlName="arisereg_year"
+            [items]="yearOptions"
+            bindLabel="label"
+            bindValue="value"
+            placeholder="-- Select Year --"
+            [searchable]="true">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label>Mark law officer/A.P.P. <span style="color: red;">*</span></label>
+          <ng-select 
+            formControlName="law_officer"
+            [items]="lawOfficers"
+            bindLabel="text"
+            placeholder="-- Select Law Officer --"
+            [searchable]="true"
+            required>
+          </ng-select>
+          <div *ngIf="form.get('law_officer')?.invalid && form.get('law_officer')?.touched" class="error-message">
+            Law officer is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Due Date For Court <span style="color: red;">*</span></label>
+          <input type="date" formControlName="date_of_due" required />
+          <div *ngIf="form.get('date_of_due')?.invalid && form.get('date_of_due')?.touched" class="error-message">
+            Due date is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Entry Date <span style="color: red;">*</span></label>
+          <input type="date" formControlName="date_of_receiving" required />
+          <div *ngIf="form.get('date_of_receiving')?.invalid && form.get('date_of_receiving')?.touched" class="error-message">
+            Entry date is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Party Details Section -->
+    <div class="section">
+      <div class="section-header">
+        <h3>Party Details</h3>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Party Name <span style="color: red;">*</span></label>
+          <input type="text" [(ngModel)]="partyModel.name" required [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="form-group">
+          <label>Father/Husband Name</label>
+          <input type="text" [(ngModel)]="partyModel.father_name" [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="form-group">
+          <label>Party Address</label>
+          <input type="text" [(ngModel)]="partyModel.address" [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="form-group">
+          <label>Petitioner's District <span style="color: red;">*</span></label>
+          <ng-select 
+            [items]="districts"
+            bindLabel="text"
+            bindValue="value"
+            [(ngModel)]="partyModel.district"
+            [ngModelOptions]="{standalone: true}"
+            placeholder="-- Select District --"
+            [searchable]="true"
+            required>
+          </ng-select>
+        </div>
+        <div class="btn-wrapper">
+          <button type="button" (click)="addParty()" class="btn-add">
+            {{ isEditingParty ? 'Update ' : 'Add ' }}
+          </button>
+          <button *ngIf="isEditingParty" type="button" (click)="cancelEditParty()" class="btn-cancel">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Party Table -->
+      <div *ngIf="party.length > 0" class="table-container">
+        <table class="professional-table">
+          <thead>
+            <tr>
+              <th>Party No</th>
+              <th>Name</th>
+              <th>Father/Husband Name</th>
+              <th>Address</th>
+              <th>District</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of party; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ p.name }}</td>
+              <td>{{ p.father_name }}</td>
+              <td>{{ p.address }}</td>
+              <td *ngIf="p.district">
+                {{ getDistrictName(p.district) }}
+              </td>
+              <td class="action-cell">
+                <button type="button" class="btn-edit" (click)="editParty(i)">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button type="button" class="btn-delete" (click)="deleteParty(i)">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Respondent Details Section -->
+    <div class="section">
+      <div class="section-header">
+        <h3>Respondent Details</h3>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Respondent Name <span style="color: red;">*</span></label>
+          <input type="text" [(ngModel)]="respondentModel.name" required [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="form-group">
+          <label>Father/Husband Name</label>
+          <input type="text" [(ngModel)]="respondentModel.father_name" [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="form-group">
+          <label>Respondent Address</label>
+          <input type="text" [(ngModel)]="respondentModel.address" [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="form-group">
+          <label>Respondent's District <span style="color: red;">*</span></label>
+          <ng-select 
+            [items]="districts"
+            bindLabel="text"
+            bindValue="value"
+            [(ngModel)]="respondentModel.district"
+            [ngModelOptions]="{standalone: true}"
+            placeholder="-- Select District --"
+            [searchable]="true"
+            required>
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label>Concern Department <span style="color: red;">*</span></label>
+          <ng-select 
+            [items]="concernDepartments"
+            bindLabel="name"
+            bindValue="user_code"
+            [(ngModel)]="respondentModel.department"
+            [ngModelOptions]="{standalone: true}"
+            placeholder="-- Select Department --"
+            [searchable]="true"
+            required>
+          </ng-select>
+        </div>
+        <div class="btn-wrapper">
+          <button type="button" (click)="addRespondent()" class="btn-add">
+            {{ isEditingRespondent ? 'Update' : 'Add ' }}
+          </button>
+          <button *ngIf="isEditingRespondent" type="button" (click)="cancelEditRespondent()" class="btn-cancel">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Respondent Table -->
+      <div *ngIf="respondents.length > 0" class="table-container">
+        <table class="professional-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Father Name</th>
+              <th>Address</th>
+              <th>District</th>
+              <th>Department</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of respondents; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ r.name }}</td>
+              <td>{{ r.father_name }}</td>
+              <td>{{ r.address }}</td>
+              <td>{{ getDistrictName(r.district) }}</td>
+              <td>{{ getDepartmentName(r.department) }}</td>
+              <td>
+                <button type="button" class="btn-edit" (click)="editRespondent(i)">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button type="button" class="btn-delete" (click)="deleteRespondent(i)">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FIR Details -->
+    <div class="section">
+      <div class="section-header">
+        <h3>FIR Details</h3>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>District</label>
+          <ng-select 
+            formControlName="police_dist_code"
+            [items]="districts"
+            bindLabel="text"
+            bindValue="value"
+            placeholder="Select District"
+            [searchable]="true">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label>Police Station</label>
+          <ng-select 
+            formControlName="police_st_code"
+            [items]="policeStations"
+            bindLabel="text"
+            bindValue="value"
+            placeholder="-- Select Police Station --"
+            [searchable]="true">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label>FIR No.</label>
+          <input type="text" formControlName="fir_no" />
+        </div>
+        <div class="form-group">
+          <label>FIR Year</label>
+          <ng-select 
+            formControlName="fir_year"
+            [items]="yearOptions"
+            bindLabel="label"
+            bindValue="value"
+            placeholder="-- Select FIR Year --"
+            [searchable]="true">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label>Under Section</label>
+          <input type="text" formControlName="under_sec" />
+        </div>
+        <div class="form-group">
+          <label>FIR Description</label>
+          <input type="text" formControlName="fir_desc" />
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-wrapper">
+      <button type="submit" [disabled]="form.invalid">Save</button>
+    </div>
+  </form>
+</div>

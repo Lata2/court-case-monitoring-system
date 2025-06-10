@@ -1,0 +1,166 @@
+<div class="pt-main-container">
+
+  <!-- Row 1: Case Details and Case Status -->
+  <div class="row">
+    <div class="case-card half-width" *ngIf="CaseDetails.CNR || CaseDetails.FilingNo || CaseDetails.RegistrationNo">
+      <h2>Case Details</h2>
+      <hr class="custom-hr" />
+      <div class="case-info">
+        <p *ngIf="CaseDetails.CNR"><strong>CNR:</strong> {{ CaseDetails.CNR }}</p>
+        <p *ngIf="CaseDetails.FilingNo"><strong>Filing No.:</strong> {{ CaseDetails.FilingNo }}</p>
+        <p *ngIf="CaseDetails.RegistrationNo"><strong>Registration No.:</strong> {{ CaseDetails.RegistrationNo }}</p>
+        <p *ngIf="CaseDetails.FilingDate"><strong>Filing Date:</strong> {{ CaseDetails.FilingDate }}</p>
+        <p *ngIf="CaseDetails.DateofRegistration"><strong>Date of Registration:</strong> {{ CaseDetails.DateofRegistration }}</p>
+      </div>
+    </div>
+
+    <div class="case-card half-width" *ngIf="CaseDetails.FirstHearingDate || CaseDetails.coram || CaseDetails.lastHearingDate">
+      <h2>Case Status</h2>
+      <hr class="custom-hr" />
+      <div class="case-info">
+        <p *ngIf="CaseDetails.FirstHearingDate"><strong>First Hearing Date:</strong> {{ CaseDetails.FirstHearingDate }}</p>
+        <p *ngIf="CaseDetails.coram"><strong>Coram:</strong> {{ CaseDetails.coram }}</p>
+        <p *ngIf="CaseDetails.lastHearingDate"><strong>Next Hearing Date:</strong> {{ CaseDetails.lastHearingDate }}</p>
+        <p *ngIf="CaseDetails.StageofCase"><strong>Stage of Case:</strong> {{ CaseDetails.StageofCase }}</p>
+        <p *ngIf="CaseDetails.BenchType"><strong>Bench Type:</strong> {{ CaseDetails.BenchType }}</p>
+        <p *ngIf="CaseDetails.JudicialBranch"><strong>Judicial Branch:</strong> {{ CaseDetails.JudicialBranch }}</p>
+        <p *ngIf="CaseDetails.CauselistType"><strong>Causelist Type:</strong> {{ CaseDetails.CauselistType }}</p>
+        <p *ngIf="CaseDetails.state"><strong>State:</strong> {{ CaseDetails.state }}</p>
+        <p *ngIf="CaseDetails.district"><strong>District:</strong> {{ CaseDetails.district }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Petitioner, Respondent, Category -->
+  <div class="row">
+    <div class="case-card third-width" *ngIf="PetitionerName || PetitionerAdvocateName">
+      <h2>Petitioner Advocate</h2>
+      <hr class="custom-hr" />
+      <div class="case-info">
+        <p *ngIf="PetitionerName"><strong>Petitioner Name:</strong> {{ PetitionerName }}</p>
+        <p *ngIf="PetitionerAdvocateName"><strong>Petitioner Advocate:</strong> {{ PetitionerAdvocateName }}</p>
+      </div>
+    </div>
+
+    <div class="case-card third-width" *ngIf="RespondentName || RespondentAdvocateName">
+      <h2>Respondent Advocate</h2>
+      <hr class="custom-hr" />
+      <div class="case-info">
+        <p *ngIf="RespondentName"><strong>Respondent Name:</strong> {{ RespondentName }}</p>
+        <p *ngIf="RespondentAdvocateName"><strong>Respondent Advocate:</strong> {{ RespondentAdvocateName }}</p>
+      </div>
+    </div>
+
+    <div class="case-card third-width" *ngIf="CategoryDetails.category || CategoryDetails.sub_category">
+      <h2>Category Details</h2>
+      <hr class="custom-hr" />
+      <div class="case-info">
+        <p *ngIf="CategoryDetails.category"><strong>Category:</strong> {{ CategoryDetails.category }}</p>
+        <p *ngIf="CategoryDetails.sub_category"><strong>Sub Category:</strong> {{ CategoryDetails.sub_category }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Details Table -->
+  <div class="table-card" *ngIf="Orders?.length">
+    <h2>Order Details</h2>
+    <hr class="custom-hr" />
+    <table>
+      <thead>
+        <tr>
+          <th>Order Details</th>
+          <th>Order Date</th>
+          <th>Order No</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of Orders">
+          <td>{{ order.order_details }}</td>
+          <td>{{ order.order_date }}</td>
+          <td>{{ order.order_no }}</td>
+          <td><button class="view-btn">View</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Document Details Table -->
+  <div class="table-card" *ngIf="DocumentDetails?.length">
+    <h2>Document Details</h2>
+    <hr class="custom-hr" />
+    <table>
+      <thead>
+        <tr>
+          <th>Document Name</th>
+          <th>Document No.</th>
+          <th>Total Pages</th>
+          <th>Upload Date</th>
+          <th>Remarks</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of DocumentDetails">
+          <td>{{ doc.docu_name }}</td>
+          <td>{{ doc.doc_slno }}</td>
+          <td>{{ doc.tot_pages }}</td>
+          <td>{{ doc.upload_date }}</td>
+          <td>{{ doc.remarks }}</td>
+          <td><button class="view-btn">View</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- IA Details Table -->
+  <div class="table-card" *ngIf="IADetails?.length">
+    <h2>IA Details</h2>
+    <hr class="custom-hr" />
+    <table>
+      <thead>
+        <tr>
+          <th>IA Number</th>
+          <th>IA Petitioner Name</th>
+          <th>IA Status</th>
+          <th>Date of Filing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ia of IADetails">
+          <td>{{ ia.ia_number }}</td>
+          <td>{{ ia.ia_pet_name }}</td>
+          <td>{{ ia.ia_pend_disp }}</td>
+          <td>{{ ia.date_of_filing }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Case History Table -->
+  <div class="table-card" *ngIf="CaseHearingHistory?.length">
+    <h2>History of Case</h2>
+    <hr class="custom-hr" />
+    <table>
+      <thead>
+        <tr>
+          <th>Cause List Type</th>
+          <th>Judge</th>
+          <th>Business on Date</th>
+          <th>Hearing Date</th>
+          <th>Purpose of Hearing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let history of CaseHearingHistory">
+          <td>{{ history.causelist_type }}</td>
+          <td [innerHTML]="history.judge_name"></td>
+          <td>{{ history.business_date }}</td>
+          <td>{{ history.hearing_date }}</td>
+          <td>{{ history.purpose_of_listing }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

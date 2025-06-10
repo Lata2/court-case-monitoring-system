@@ -1,0 +1,57 @@
+<!-- Sidebar -->
+<div class="sidebar" [class.open]="sidebarOpen">
+  <ul>
+    <ng-container *ngFor="let item of menuList">
+      <li [class.parent]="item.children?.length > 0">
+        <!-- Simple Route -->
+        <a *ngIf="item.route" (click)="navigateTo(item)" [routerLinkActive]="'active-link'">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          {{ item.menu_name }}
+        </a>
+
+        <!-- Parent with Children -->
+        <div class="parent-label" *ngIf="!item.route && item.children?.length > 0" (click)="toggleDropdown(item)" style="display: flex; justify-content: space-between; width: 95%;">
+          <span><mat-icon>{{ item.icon }}</mat-icon> {{ item.menu_name }}</span>
+          <mat-icon>{{ activeDropdown === item.menu_code ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </div>
+
+        <!-- Dropdown for child items -->
+        <ul *ngIf="item.children?.length > 0 && activeDropdown === item.menu_code" class="dropdown-menu">
+          <ng-container *ngFor="let child of item.children">
+            <li>
+              <a (click)="navigateTo(child)" [routerLinkActive]="'active-link'">
+                <mat-icon>{{ child.icon }}</mat-icon>
+                {{ child.menu_name }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ul>
+</div>
+
+
+<!-- Header and Main Content -->
+<app-main-header [class.shifted]="sidebarOpen"></app-main-header>
+
+<div class="main-content" [class.shifted]="sidebarOpen">
+  <div class="header_user_name">
+    <span class="welcome-text">
+      <span class="material-icons" (click)="toggleSidebar()">menu</span>
+      Welcome: [ <strong style="color: red;">{{ userId }}</strong> ]
+      | Your Session Will Expire In: <span style="color: blue;">{{ formattedTime }}</span> ⏳ |
+    </span>
+
+    <div class="header-buttons">
+      <span class="notification-wrapper">
+        <span class="material-icons">notifications</span>
+        <span class="badge">{{ notificationCount }}</span>
+      </span>
+      <button class="btn logout" (click)="logout()">Log Out</button>
+      <button class="btn download animate__animated animate__pulse animate__infinite">Download</button>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

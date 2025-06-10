@@ -1,0 +1,161 @@
+.advocate-container {
+  width: 98%;
+  margin: 1% auto;
+  background: #fff;
+  padding: 1%;
+  border-radius: 0.75rem;
+  /* border: 1px solid #ddd; */
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.75rem;
+  color: #2a4365;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-decoration: underline;
+}
+
+/* make the button itself invisible and size to the icon */
+.edit-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* color the icon blue */
+.edit-btn i {
+  color: #007bff;   /* or any blue you like */
+  font-size: 1.2rem;
+}
+
+/* optional hover effect */
+.edit-btn:hover i {
+  color: #0056b3;
+}
+
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  padding: 1%;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+.button-container {
+  /* grid-column: span 2; */
+  /* border: 1px solid #ccc; */
+  /* margin: auto; */
+  width: 200%;
+  margin-left: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.update-btn {
+  background-color: #2b6cb0;
+  color: white;
+}
+
+.reset-btn {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.5rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.controls > div {
+  flex: 1 1 45%;
+}
+.controls label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.controls input,
+.controls select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+thead {
+ background-color: #092c4f;
+ border: 1px solid #ddd;
+}
+thead th {
+  color: #fff;
+  padding: 1%;
+  text-align: left;
+ border: 1px solid #ccc;
+
+}
+tbody td {
+  padding: 1%;
+ border: 1px solid #ddd;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+tbody tr:nth-child(even) {
+  background-color: #f7fafc;
+}
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+}
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #2b6cb0;
+  color: white;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+.pagination button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}

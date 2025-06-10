@@ -1,0 +1,130 @@
+<h1>Allocate Details</h1>
+
+<div class="form-wrapper">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <!-- Section 1: Case Details -->
+    <div class="form-card-main">
+      <div class="form-card">
+        <h2>Case Details</h2>
+        <div class="grid-2">
+          <div class="form-group" *ngFor="let field of [
+    { label: 'Reg No', key: 'regno' },
+    { label: 'CNR No', key: 'cnrno' },
+    { label: 'Petitioner Name', key: 'petitionername' },
+    { label: 'Petitioner Advocate', key: 'petitioneradvocatename' },
+    { label: 'Respondent Name', key: 'respondentname' },
+    { label: 'Respondent Advocate', key: 'respondentadvocatename' },
+    { label: 'Court Name', key: 'courtname' },
+    { label: 'Next Hearing Date', key: 'nexthearingdate', type: 'date' }
+  ]">
+            <label>{{ field.label }}</label>
+            <input [type]="field.type || 'text'" class="form-control" [name]="field.key"
+              [(ngModel)]="formData[field.key]" readonly />
+
+          </div>
+        </div>
+
+
+        <!-- Example of a specific date field -->
+        <!-- <input type="date" id="docdate" name="docdate" [(ngModel)]="formData['docdate']" /> -->
+
+
+
+      </div>
+
+      <!-- Section 2: Action Details -->
+      <div class="form-card">
+        <h2>Action Details</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="action">Action</label>
+            <select id="action" name="action" [(ngModel)]="selectedAction" (change)="onActionChange($event)">
+              <option value="assign">Assign Activity</option>
+              <option value="not_preparing">Not preparing for our office</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2" *ngIf="selectedAction === 'assign'">
+          <div class="form-group" *ngFor="let f of ['office','compliance','activity','copy_to']">
+            <label [for]="f">{{ f | titlecase }}</label>
+            <select [id]="f" [name]="f" [(ngModel)]="formData[f]"></select>
+          </div>
+          <div class="form-group">
+            <label for="duedate">Due Date</label>
+            <input type="date" id="duedate" name="duedate" [(ngModel)]="formData.duedate">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="remarks">Remarks</label>
+          <input type="text" id="remarks" name="remarks" [(ngModel)]="formData.remarks">
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Document Upload -->
+    <div class="form-card-docu" *ngIf="selectedAction === 'assign'">
+      <h2>Document Upload</h2>
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="doctype">Document Type</label>
+          <select id="doctype" name="doctype" [(ngModel)]="formData.doctype"></select>
+        </div>
+        <div class="form-group">
+          <label for="docnumber">Document Number</label>
+          <input type="text" id="docnumber" name="docnumber" [(ngModel)]="formData.docnumber">
+        </div>
+        <div class="form-group">
+          <label for="upload">Upload Document</label>
+          <input type="file" id="upload" name="upload" (change)="onFileChange($event)">
+        </div>
+        <div class="form-group">
+          <label for="docdate">Document Date</label>
+          <input type="date" id="docdate" name="docdate" [(ngModel)]="formData.docdate">
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="submit">Submit</button>
+      <button type="button" class="secondary">Close</button>
+    </div>
+  </form>
+
+  <!-- Table Section -->
+  <div class="table-section">
+    <h2>Uploaded Documents</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Sl. No.</th>
+          <th>Document Type</th>
+          <th>Document No.</th>
+          <th>Date</th>
+          <th>Remarks</th>
+          <th>Upload Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngIf="uploadDocuments.length === 0">
+          <td colspan="7" style="text-align: center;">Record not found</td>
+        </tr>
+        <tr *ngFor="let doc of uploadDocuments; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ doc.doc_type }}</td>
+          <td>{{ doc.doc_number }}</td>
+          <td>{{ doc.doc_date }}</td>
+          <td>{{ doc.remarks }}</td>
+          <td>{{ doc.upload_date }}</td>
+          <!-- <td><button class="table-btn" (click)="/*viewFile(doc)*/">View</button></td> -->
+          <td><button class="table-btn" (click)="viewFile(doc)">View</button></td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

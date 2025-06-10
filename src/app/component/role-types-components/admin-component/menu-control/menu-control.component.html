@@ -1,0 +1,154 @@
+<!-- Header Controls -->
+<div class="menu-header">
+  <select class="role-select" [(ngModel)]="selectedRole" (change)="applyFilters()">
+    <option disabled value="">Select Role Type</option>
+    <option *ngFor="let role of roleTypes" [value]="role.role_id">{{ role.role_type }}</option>
+  </select>
+
+  <select class="role-select" [(ngModel)]="selectedMenuType" (change)="applyFilters()">
+    <option value="">All Menu Types</option>
+    <option *ngFor="let type of menuTypes" [value]="type.value">{{ type.label }}</option>
+  </select>
+
+  <select class="role-select" [(ngModel)]="selectedActiveStatus" (change)="applyFilters()">
+    <option value="">All</option>
+    <option [ngValue]="true">Active</option>
+    <option [ngValue]="false">Inactive</option>
+  </select>
+
+  <div class="search-box-wrapper">
+    <input type="text" class="search-input-custom" placeholder="Search anything..."
+      [(ngModel)]="searchText" (input)="applyFilters()" />
+    <span class="material-icons search-icon">search</span>
+  </div>
+
+  <button (click)="openModal()" class="add_button">+ Add Menu</button>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal">
+    <form [formGroup]="menuForm" (ngSubmit)="submitMenuForm()">
+      <h2 style="text-align: center; text-decoration: underline;">
+        {{ editingIndex !== null ? 'Edit' : 'Add' }} Menu
+      </h2>
+
+      <div class="input-row">
+        <div class="form-field">
+          <label>Menu Name</label>
+          <input type="text" formControlName="menu_name" />
+          <small class="error" *ngIf="menuForm.get('menu_name')?.touched && menuForm.get('menu_name')?.invalid">
+            Menu Name is required
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label>Menu Type</label>
+          <select formControlName="children">
+            <option *ngFor="let type of menuTypes" [value]="type.value">{{ type.label }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="form-field">
+          <label>Menu Route</label>
+          <input type="text" formControlName="route" />
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="form-field">
+          <label>Menu Order</label>
+          <input type="text" formControlName="menu_order" />
+          <small class="error" *ngIf="menuForm.get('menu_order')?.touched && menuForm.get('menu_order')?.invalid">
+            Menu Order is required
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label>Menu Icon</label>
+          <select formControlName="icon">
+            <option *ngFor="let icon of availableIcons" [value]="icon">{{ icon }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="form-field">
+          <label>Role Type</label>
+          <select formControlName="role_id" required>
+            <option value="" disabled>Select Role</option>
+            <option *ngFor="let role of roleTypes" [value]="role.role_id">{{ role.role_type }}</option>
+          </select>
+        </div>
+
+
+
+
+        <div class="form-field">
+          <label>Parent Menu</label>
+          <select formControlName="main_menu_code">
+            <option value="">Select Parent Menu</option>
+            <option *ngFor="let parent of parentMenuOptions" [value]="parent.menu_code">
+              {{ parent.menu_name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="modal-actions">
+        <button type="submit" class="btn submit-btn">Submit</button>
+        <button type="button" (click)="closeModal()" class="btn cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Menu Table -->
+<div class="menu-table-container">
+  <table class="menu-table">
+    <thead>
+      <tr style="text-align: center;">
+        <th>Menu Code</th>
+        <th>Menu Icon</th>
+        <th>Menu Name</th>
+        <th>Role Type</th>
+        <th>Order</th>
+        <th>Menu Type</th>
+        <th>Parent Menu</th>
+        <th>Route</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredMenuItems(); let i = index" style="text-align: center;">
+        <td>{{ item.menu_code }}</td>
+        <td><span class="material-icons">{{ item.icon || 'menu' }}</span></td>
+        <td>{{ item.menu_name }}</td>
+        <td>{{ item.role_type }}</td>
+        <td>{{ item.menu_order }}</td>
+        <td>{{ item.children }}</td>
+        <td>{{ item.main_menu_code }}</td>
+        <td>{{ item.route }}</td>
+        <td class="action-icons">
+          <label class="switch" title="Toggle Active">
+            <input type="checkbox" [checked]="item.is_active" (change)="toggleActive(i)" />
+            <span class="slider round"></span>
+          </label>
+          <span class="material-icons edit-icon" title="Edit" (click)="editMenu(i)">edit</span>
+          <span class="material-icons delete-icon" title="Delete" (click)="deleteMenu(i)">delete</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

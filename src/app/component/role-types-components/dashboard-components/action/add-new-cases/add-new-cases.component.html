@@ -1,0 +1,101 @@
+<h1>Add New Case</h1>
+
+<div class="add-new-case-form-container">
+  <form [formGroup]="addCaseForm" (ngSubmit)="onSubmit()">
+
+    <!-- Court Name -->
+    <div class="form-group">
+      <label for="court_name">Court Name:</label>
+      <ng-select [items]="courts" bindLabel="est_name" bindValue="est_id" formControlName="court_name"
+        placeholder="-- Select Court --" [searchable]="true" [clearable]="true" class="normal-dropdown">
+      </ng-select>
+    </div>
+
+    <!-- Case Nature -->
+    <div class="form-group">
+      <label for="case_type">Case Nature:</label>
+      <ng-select [items]="caseNatures" bindLabel="case_type" bindValue="case_type_id" formControlName="case_type"
+        placeholder="-- Select Nature --" [searchable]="true" [clearable]="true" class="normal-dropdown">
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.case_type_short_name }} - {{ item.case_type }}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item">
+          {{ item.case_type_short_name }} - {{ item.case_type }}
+        </ng-template>
+      </ng-select>
+    </div>
+
+    <div class="form-group">
+      <label for="case_no">Case No:</label>
+      <input style="border-color: rgb(211, 219, 227);" type="text" id="case_no" formControlName="case_no" maxlength="5" 
+        placeholder="Enter Case Number" (keypress)="allowOnlyNumbers($event)"
+        [ngClass]="{'is-invalid': caseNoControl?.touched && caseNoControl?.invalid}" />
+
+      <div class="invalid-feedback" *ngIf="caseNoControl?.touched && caseNoControl?.errors?.['required']">
+        Case number is required.
+      </div>
+      <div class="invalid-feedback" *ngIf="caseNoControl?.touched && caseNoControl?.errors?.['pattern']">
+        Only numbers allowed (no leading 0, max 5 digits).
+      </div>
+    </div>
+
+    <!-- Case Year -->
+    <div class="form-group">
+      <label for="case_year">Case Year:</label>
+      <ng-select [items]="years" bindLabel="year" bindValue="year" formControlName="case_year"
+        placeholder="-- Select Year --" [searchable]="true" [clearable]="true" class="normal-dropdown">
+      </ng-select>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+      <button type="submit" [disabled]="addCaseForm.invalid">Search Case</button>
+      <button type="reset" (click)="resetForm()">Reset</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- Loading Indicator -->
+<div *ngIf="loading" class="loading-indicator">
+  <div class="spinner"></div>
+  Searching for cases. Please wait...
+</div>
+
+<!-- Results Section -->
+<div class="case-list" *ngIf="showResults">
+  <table class="menu-table">
+    <thead>
+      <tr style="text-align: center;">
+        <th>Court Name</th>
+        <th>CINO</th>
+        <th>Petitioner Name</th>
+        <th>Respondent Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of data" style="text-align: center;">
+        <td>{{ item.establishment_name}}</td>
+        <td>{{ item.cino }}</td>
+        <td>{{ item.pet_name }}</td>
+        <td>{{ item.res_name }}</td>
+        <td>
+          <button class="add_dashboard_button" (click)="addCaseToDashboard(item)">Add Case in Dashboard</button>
+        </td>
+      </tr>
+
+      <tr *ngIf="data.length === 0" style="text-align: center;">
+        <td colspan="5" style="font-size: large; padding: 20px;">
+          <div *ngIf="timeoutOccurred" class="text-danger">
+            Request timed out. Please try again.
+          </div>
+          <div *ngIf="!timeoutOccurred" class="text-info">
+            Record not found
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

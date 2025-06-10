@@ -1,0 +1,119 @@
+<div class="dispatch-container">
+
+  <div style="border: 1px solid; color: white;padding-left: 2%;background-color: #072849;height: 6vh;width: 98%;">
+    <h3>Dispatch Case</h3>
+  </div>
+
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="filter-section">
+    <input formControlName="caseNo" placeholder="Case No" />
+    <input formControlName="petitioner" placeholder="Petitioner Name" />
+    <input formControlName="respondent" placeholder="Respondent Name" />
+
+    <select formControlName="department">
+      <option value="">All Departments</option>
+      <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+    </select>
+
+    <select formControlName="caseType">
+      <option value="">All Case Types</option>
+      <option *ngFor="let type of caseTypes" [value]="type">{{ type }}</option>
+    </select>
+
+    <input type="date" formControlName="dispatchFrom" />
+    <input type="date" formControlName="dispatchTo" />
+
+    <select formControlName="status">
+      <option value="">All Statuses</option>
+      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+    </select>
+  </form>
+
+  <p *ngIf="docDate">Document Date: {{ docDate }}</p>
+
+  <!-- === Main Dispatch Table === -->
+  <table class="dispatch-table">
+    <thead>
+      <tr>
+        <th>Sl. No</th>
+        <th>AG NO.</th>
+        <th>Petitioner Name</th>
+        <th>Respondent Name</th>
+        <th>Law Officer</th>
+        <th>Date of Receiving</th>
+        <th>Due Date</th>
+        <th>Uploaded Document</th>
+        <th>Edit Document</th>
+        <th>Select For Dispatch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="paginatedCases.length === 0">
+        <td colspan="10" style="text-align: center; color: red;">No records found</td>
+      </tr>
+      <tr *ngFor="let case of paginatedCases; let i = index">
+        <td>{{ (page - 1) * pageSize + i + 1 }}</td>
+        <td>{{ case.caseNo }}</td>
+        <td>{{ case.petitioner }}</td>
+        <td>{{ case.respondent }}</td>
+        <td>{{ case.law_officer }}</td>
+        <td>{{ case.date_of_receiving | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ case.date_of_due | date: 'yyyy-MM-dd' }}</td>
+        <td>
+          <a *ngIf="case.file_nm" [href]="getFileUrl(case.file_nm)" target="_blank" style="color: #cf1322;">
+            <i nz-icon nzType="file-pdf" nzTheme="twotone" style="font-size: 20px;"></i>
+          </a>
+        </td>
+        <td><button>edit</button></td>
+        <td><input type="checkbox" (click)="getConcernData(case.caseNo)" (change)="toggleCaseSelection(case, $event)" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- === Pagination Buttons === -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="page === 1">&laquo; Prev</button>
+    <button (click)="nextPage()" [disabled]="page * pageSize >= filteredCases.length">Next &raquo;</button>
+  </div>
+
+<!-- === Concern Data Table === -->
+<div class="dispatch-container" *ngIf="dispatchVisible">
+  <table class="dispatch-table">
+    <thead>
+      <tr>
+        <th>Sl.No.</th>
+        <th>Concerned Respondent</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="!concernData || concernData.length === 0">
+        <td colspan="3" style="text-align: center; color: red;">No records found</td>
+      </tr>
+      <tr *ngFor="let concern of concernData; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ concern.conname }}</td>
+        <td>{{ concern.RespondentName }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Show this only if there is concern data -->
+  <div class="form-row" *ngIf="concernData && concernData.length > 0">
+    <div class="form-group">
+      <label for="subject">*Subject</label>
+      <input type="text" id="subject" />
+    </div>
+
+    <div class="form-group">
+      <label for="dueDate">*Due Date</label>
+      <input type="date" id="dueDate" />
+    </div>
+
+    <div class="form-group">
+      <button class="dispatch-btn">Dispatch</button>
+    </div>
+  </div>
+</div>
+
+
+</div>

@@ -1,0 +1,239 @@
+.dashboard_heading {
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    -webkit-text-stroke: 1px rgb(64, 4, 64);
+    color: rgb(76, 72, 72);
+    /* Optional: Text color to make stroke more visible */
+}
+
+.calendar-container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    background: #054386;
+    /* background-color: #342f66; */
+    color: white;
+    padding: 1%;
+    border-radius: 1vw;
+    width: 95%;
+    margin: auto;
+
+}
+
+button {
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2vw;
+    padding: 0.8vw 1.5vw;
+    border-radius: 0.5vw;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1%;
+    margin-top: 2%;
+    width: 95%;
+    margin: auto;
+}
+
+.weekday {
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #eee;
+    padding: 1.2%;
+    border-radius: 0.5vw;
+}
+
+.calendar-grid div {
+    padding: 2%;
+    text-align: center;
+    border-radius: 1vw;
+}
+
+.saturday {
+    background: #9d6908;
+    /* Orange */
+    color: white;
+}
+
+.sunday {
+    background: #9a1111;
+    /* Red */
+    color: white;
+}
+
+/* ✅ Responsive Dropdown */
+.calendar-header select {
+    padding: 1%;
+    font-size: 1.2vw;
+    border: 0.2vw solid #fff;
+    border-radius: 0.8vw;
+    background: white;
+    color: #333;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 20%;
+}
+
+.calendar-header select:focus {
+    border-color: #042243;
+    box-shadow: 0px 4px 12px rgba(0, 91, 187, 0.6);
+    outline: none;
+}
+
+/* ✅ Custom Dropdown Arrow */
+.calendar-header select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5H7z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1vw center;
+    background-size: 1.5vw;
+    padding-right: 3vw;
+}
+
+
+.dashboard_box_container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* background-color: rgb(251, 244, 244); */
+    height: auto;
+    gap: 1%;
+}
+
+.box_container {
+    margin-top: 2%;
+    /* border: 1PX solid; */
+    padding: 1%;
+    height: auto;
+    font-weight: bold;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+
+}
+
+.main_box_container {
+    width: 18%;
+    padding: 1%;
+    border: 1px solid #ddd;
+    border-radius: 12px;  /* stays in px */
+    background-color: #fff;
+    box-shadow: 0 2% 6% rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+   height: auto;
+   
+}
+.box_container {
+    background-color: #5c2882;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 4%;
+    border-radius: 8px;  /* stays in px */
+    margin-bottom: 4%;
+    font-size: 1.2em;
+}
+
+.box_container hr {
+    border: 0;
+    border-top: 0.1em solid rgba(255, 255, 255, 0.5);
+    margin: 4% 0;
+}
+
+.box_details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   
+}
+
+.box_detail_value {
+    display: flex;
+    align-items: center;
+    padding: 2%;
+    background-color: #f9f9f9;
+    border: 0.1em solid #e0e0e0;
+    border-radius: 8px;  /* stays in px */
+    box-shadow: 0 1% 3% rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    /* font-weight: bold; */
+    font-size: 0.9em;
+    gap: 10px;
+}
+.box_detail_value:hover{
+    background-color: rgb(241, 230, 236);
+}
+
+.box_span {
+    display: inline-block;
+    background-color: #6a0dad;
+    color: white;
+    font-weight: bold;
+    margin-top: 2%;
+    width: 20%;
+    padding-top: 5%;
+padding:5%;
+    /* aspect-ratio: 1/1; */
+    line-height: 1;
+    text-align: center;
+    border-radius: 50px; 
+    font-size: 1em;
+   
+}
+
+.main_box_container {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.main_box_container:hover {
+    transform: scale(1.02);
+}
+
+
+.calendar-cell {
+  text-align: center;
+
+  /* padding: 8px; */
+  /* border: 1px solid #ccc; */
+}
+
+.calendar-cell div {
+  /* line-height: 1.2; */
+  
+}
+
+.count-text {
+  font-size: small;
+  /* color: gray; */
+  /* border: 1px solid; */
+  padding: 1%;
+  /* background-color:transparent rebeccapurple; */
+    background: rgba(255, 255, 255, 0.15);
+    background-color: rgb(207, 195, 195);
+    font-weight: bold;
+}
+
+
+
+.calendar-cell:hover {
+  background-color: #f0f0f0;
+}
+
+.calendar-cell.clickable {
+  cursor: pointer;
+}

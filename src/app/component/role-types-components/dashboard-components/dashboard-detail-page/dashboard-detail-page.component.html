@@ -1,0 +1,78 @@
+
+<app-serch-component></app-serch-component>
+<!-- <div class="form-container">
+    <div class="form-row">
+        <div class="form-group">
+            <label for="caseNature">Case Nature</label>
+            <select id="caseNature"></select>
+        </div>
+        <div class="form-group">
+            <label for="caseNo">Case No</label>
+            <input type="text" id="caseNo">
+        </div>
+        <div class="form-group">
+            <label for="caseYear">Case Year</label>
+            <select id="caseYear"></select>
+        </div>
+        <div class="form-group">
+            <label for="petitionerName">Petitioner Name</label>
+            <input type="text" id="petitionerName">
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type"></select>
+        </div>
+        <div class="search-button">
+            <button>Search</button>
+        </div>
+    </div>
+</div> -->
+
+<div class="table-container">
+    <div class="table-controls">
+        <span>Page Size:</span>
+        <select id="pageSize">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+        </select>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Sr. No</th>
+                <th>Case Nature</th>
+                <th>Case No</th>
+                <th>Year</th>
+                <th>Petitioner Name</th>
+                <th>Type</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example row -->
+            <tr>
+                <td>1</td>
+                <td>Example Nature</td>
+                <td>12345</td>
+                <td>2024</td>
+                <td>John Doe</td>
+                <td>Example Type</td>
+                <td><button class="view-btn">View</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button class="page-btn">«</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">»</button>
+    </div>
+
+    <div class="record-info">
+        Total Records: 10
+    </div>
+</div>

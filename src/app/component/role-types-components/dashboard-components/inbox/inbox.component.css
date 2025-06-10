@@ -1,0 +1,131 @@
+.dashboard_box_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* background-color: rgb(251, 244, 244); */
+  
+  height: 20vh;
+}
+
+.box_container {
+  margin-top: 2%;
+  /* border: 1PX solid; */
+  padding: 1%;
+  height: 5vh;
+  font-weight: bold;
+  width: 20%;
+  text-align: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+
+}
+
+.search-container {
+  width: 90%;
+  /* ✅ Form ki width 90% rakhi hai */
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.radio-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.radio-group label {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-container {
+  display: flex;
+  /* ✅ Horizontal Alignment ke liye */
+  align-items: center;
+  /* ✅ Vertical Center */
+  gap: 2%;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  /* ✅ Mobile screens ke liye */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+  /* ✅ Saare fields ki width equal rakhi hai */
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* ✅ Search Button Styling */
+.button-group {
+  width: 15%;
+  /* ✅ Button ka width bhi percentage me hai */
+  display: flex;
+  justify-content: center;
+}
+
+.search-button {
+  padding: 4%;
+  border: none;
+  background: #0356af;
+  margin-top: 8%;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 80%;
+  /* ✅ Button ki width bhi proper align hogi */
+}
+
+.search-button:hover {
+  background: #0056b3;
+}
+
+/* ✅ Responsive Design ke liye */
+@media (max-width: 768px) {
+  .form-container {
+    flex-wrap: wrap;
+    /* ✅ Mobile pe neeche aayega */
+  }
+
+  .form-group {
+    width: 45%;
+    /* ✅ Mobile screen par 2 columns me adjust karega */
+  }
+
+  .button-group {
+    width: 100%;
+    /* ✅ Mobile par button full width hoga */
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-group {
+    width: 100%;
+    /* ✅ Choti screens par ek field ek row me aayegi */
+  }
+}

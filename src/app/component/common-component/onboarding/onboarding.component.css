@@ -1,0 +1,100 @@
+.onboarding_main_container{
+  /* border: 1px solid; */
+  /* height: auto; */
+  height: 100vh;
+  width: 100%;
+  /* padding: 1%; */
+  background: linear-gradient(rgb(226, 227, 244),rgb(228, 232, 242));
+
+}
+.form_heading{
+  color: rgb(8, 45, 76);
+  text-align: center;
+  text-decoration: underline;
+}
+
+.onboarding_nav_container{
+  /* border: 1px solid; */
+  height: 8vh;
+  width: 100%;
+  background-color:green;
+
+}
+
+.onboarding_form{
+ margin: auto;
+ padding: 1%;
+ margin-top: 2%;
+  width: 85%;
+  padding: 1%;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.dept_details_container{
+  display: flex;
+  /* border: 1px solid; */
+  width: 98%;
+  padding: 1%;
+  column-gap: 1%;
+}
+
+.input_box{
+  width: 97%;
+  height: 5vh;
+}
+
+.nodal_details_container{
+  width: 97%;
+  display: flex;
+  padding: 1%;
+  column-gap: 1%;
+
+}
+
+.submit_button{
+  height: 4vh;
+  width: 30%;
+  border-radius: 5px;
+  background-color: rgb(7, 141, 7);
+  border:1px solid white;
+  color: white;
+  font-size: larger;
+  margin-left: 35%;
+  cursor: pointer;
+
+}
+.error-border {
+  border: 2px solid red !important;
+  background-color: #ffebeb;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+
+.submit_button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.onboarding_form_head {
+  width: 98%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%;
+  background: #2c3e50;
+  /* background-color:brown; */
+  color: white;
+}
+.onboarding_logo1 {
+  height: 10vh;
+}
+
+.onboarding_logo2 {
+  height: 10vh;
+}

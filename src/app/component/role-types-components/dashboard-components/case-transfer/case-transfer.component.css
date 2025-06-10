@@ -1,0 +1,89 @@
+.container {
+    width: 95%;
+    /* border: 1px solid; */
+    /* max-width: 1200px; */
+    margin: auto;
+    background: #ffffff;
+    padding: 1%;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2%;
+}
+
+.form-group {
+    flex: 1;
+    /* min-width: 22%;  */
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom:1%;
+    color: #555;
+}
+
+select, input {
+    width: 90%;
+    padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    /* width: 100%; */
+    margin-top: 2%;
+}
+
+.btn {
+    flex: 1; /* Equal width for both buttons */
+    max-width: 10%;
+    padding: 1%;
+    height: 5vh;
+    background-color: #044182;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2vw; /* Responsive font size */
+    cursor: pointer;
+    text-align: center;
+    /* transition: background 0.3s ease-in-out; */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.dashboard_heading {
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    -webkit-text-stroke: 1px rgb(64, 4, 64); /* Stroke width and color */
+    color: rgb(76, 72, 72); /* Optional: Text color to make stroke more visible */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-group {
+        min-width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-group {
+        min-width: 100%;
+    }
+}

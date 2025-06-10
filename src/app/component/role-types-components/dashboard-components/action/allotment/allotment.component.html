@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <app-main-header></app-main-header> -->
+<!-- <app-header></app-header> -->
+
+<h1>Allotment DashBoard</h1>
+<div class="dashboard_box_container">
+
+  <div class="box_container"
+       style="box-shadow: 0px 4px 10px rgba(128, 0, 128, 0.8); background-color: rgba(250, 242, 250, 0.8);">
+    <p>Direct</p>
+    <p (click)="navigateWithQueryType(1)" class="clickable-number">{{ directCases }}</p>
+  </div>
+
+  <div class="box_container"
+       style="box-shadow: 0px 4px 10px rgba(2, 57, 15, 0.8); background-color: rgba(237, 249, 240, 0.8);">
+    <p>Under Process</p>
+    <p (click)="navigateWithQueryType(2)" class="clickable-number">{{ selfExamine }}</p>
+  </div>
+
+  <div class="box_container"
+       style="box-shadow: 0px 4px 10px rgba(188, 119, 15, 0.8); background-color: rgba(246, 233, 214, 0.8);">
+    <p>Pending with Office</p>
+    <p (click)="navigateWithQueryType(3)" class="clickable-number">{{ returnCase }}</p>
+  </div>
+
+  <div class="box_container"
+       style="box-shadow: 0px 4px 10px rgba(3, 58, 117, 0.8); background-color: rgba(224, 236, 248, 0.8);">
+    <p>Return Cases</p>
+    <p (click)="navigateWithQueryType(4)" class="clickable-number">{{ directorate }}</p>
+  </div>
+
+</div>
+
+  <!-- </div> -->
+<!-- <hr/> -->
+</body>
+</html>
+</body>
+</html>

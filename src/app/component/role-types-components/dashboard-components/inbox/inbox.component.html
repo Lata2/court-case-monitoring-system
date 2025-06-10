@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <app-main-header></app-main-header> -->
+<!-- <app-header></app-header> -->
+
+<div class="dashboard_box_container">
+  <div class="box_container" style="box-shadow: 0px 4px 10px rgba(128, 0, 128, 0.8);background-color:rgba(250, 242, 250, 0.8) ;">TOTAL RECIEVED</div>
+  <div class="box_container" style="box-shadow: 0px 4px 10px rgba(2, 57, 15, 0.8);background-color:rgba(237, 249, 240, 0.8) ;">FORWORDED</div>
+  <!-- <div class="box_container" style="box-shadow: 0px 4px 10px rgba(133, 7, 7, 0.8);background-color:rgba(243, 231, 231, 0.8) ;">TOTAL PENDING COMPLIANCE</div> -->
+  <div class="box_container" style=" box-shadow: 0px 4px 10px rgba(188, 119, 15, 0.8);background-color:rgba(246, 233, 214, 0.8);">NOT FORWORDED</div>
+  <div class="box_container" style=" box-shadow: 0px 4px 10px rgba(3, 58, 117, 0.8);background-color:rgba(224, 236, 248, 0.8) ;">TOTAL PENDING FOR REPLY</div>
+
+
+</div>
+<div class="search-container">
+<div class="radio-group">
+  <label>
+    <input type="radio" name="searchType" [(ngModel)]="searchType" value="case" />
+    Search by Case No.
+  </label>
+
+  <label>
+    <input type="radio" name="searchType" [(ngModel)]="searchType" value="ag" />
+    Search by Ag No.
+  </label>
+</div>
+
+<!-- Case No. Fields (Single Row) -->
+<div class="form-container" *ngIf="searchType === 'case'">
+  <div class="form-group">
+    <label>Case Nature</label>
+    <select></select>
+  </div>
+
+  <div class="form-group">
+    <label>Case No.</label>
+    <input type="text">
+  </div>
+
+  <div class="form-group">
+    <label>Petitioner</label>
+    <input type="text">
+  </div>
+
+  <div class="form-group">
+    <label>Case Year</label>
+    <input type="text">
+  </div>
+
+  <!-- Search Button -->
+  <div class="form-group">
+    <button class="search-button">Search</button>
+  </div>
+</div>
+
+<!-- Ag No. Fields (Single Row) -->
+<div class="form-container" *ngIf="searchType === 'ag'">
+  <div class="form-group">
+    <label>Case Nature</label>
+    <select></select>
+  </div>
+
+  <div class="form-group">
+    <label>Ag No.</label>
+    <input type="text">
+  </div>
+
+  <div class="form-group">
+    <label>Petitioner</label>
+    <input type="text">
+  </div>
+
+  <!-- Search Button -->
+  <div class="form-group">
+    <button class="search-button">Search</button>
+  </div>
+</div>
+</div>
+
+<div class="container">
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Sl. NO.</th>
+                <th>CNR Case NO.</th>
+                <th>Petitioner Name</th>
+                <th>Compliance From</th>
+                <th>Compliance To</th>
+                <th>Compliance Status</th>
+                <th>Activity</th>
+                <th>Remarks</th>
+                <th>Due Date</th>
+                <th>Compliance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>CNR001</td>
+                <td>John Doe</td>
+                <td>01-01-2025</td>
+                <td>10-01-2025</td>
+                <td>Pending</td>
+                <td>Review</td>
+                <td>Urgent</td>
+                <td>15-01-2025</td>
+                <td>History</td>
+
+                <!-- <td><button class="btn">Edit</button></td> -->
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>CNR002</td>
+                <td>Jane Smith</td>
+                <td>05-01-2025</td>
+                <td>15-01-2025</td>
+                <td>In Progress</td>
+                <td>Approval</td>
+                <td>Needs Clarification</td>
+                <td>20-01-2025</td>
+                <td>History</td>
+
+                <!-- <td><button class="btn">Edit</button></td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+
+</body>
+</html>

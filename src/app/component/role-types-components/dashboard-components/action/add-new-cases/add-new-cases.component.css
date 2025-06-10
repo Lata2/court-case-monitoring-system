@@ -1,0 +1,337 @@
+/* Add this at the top of your CSS */
+/* Ensure you've imported ng-select theme in angular.json */
+/* Loading Indicator */
+.loading-indicator {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.text-danger {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.text-info {
+  color: #17a2b8;
+  font-weight: bold;
+}
+
+::ng-deep {
+  /* Main container styling */
+  .ng-select.normal-dropdown {
+    width: 100%;
+    margin: 8px 0;
+    border-radius: 0.5em;
+    font-size: 16px;
+
+    /* Input container */
+    .ng-select-container {
+      border: 2px solid #6c63ff !important;
+      border-radius: 8px;
+      padding: 8px 12px;
+      background-color: #f9f9f9;
+      min-height: 44px;
+      
+      /* Placeholder text */
+      .ng-placeholder {
+        color: #666;
+      }
+    }
+
+    /* Dropdown panel */
+    .ng-dropdown-panel {
+      border: 2px solid #6c63ff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 4px;
+
+      /* Options styling */
+      .ng-option {
+        padding: 10px 12px;
+        border-bottom: 1px solid #eee;
+        transition: all 0.2s ease;
+
+        /* Hover state */
+        &:hover, &.marked {
+          background-color: #f0f0f0;
+          border-left: 4px solid #6c63ff;
+        }
+
+        /* Selected option */
+        &.selected {
+          background-color: #e8f4ff;
+        }
+      }
+
+      /* Search input */
+      .ng-input input {
+        border: 2px solid #6c63ff;
+        border-radius: 5px;
+        padding: 8px;
+        margin: 8px;
+        width: calc(100% - 16px);
+      }
+    }
+
+    /* Clear and dropdown indicators */
+    .ng-clear-wrapper, .ng-arrow-wrapper {
+      color: #666;
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+} 
+
+ h1 {
+      text-align: center;
+      text-decoration: underline;
+      font-weight: bold;
+      -webkit-text-stroke: 1px rgb(64, 4, 64); 
+      color: rgb(76, 72, 72);
+    }
+
+    .add-new-case-form-container {
+      justify-content: space-evenly;
+      width: 90%;
+      /* margin: auto; */
+      height: auto;
+      column-gap: 10%;
+      /* padding: 1%; */
+      margin: 0.2%;
+      /* border: 1px solid; */
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: flex-end;
+      gap: 1%;
+      width: 100%;
+    }
+
+    .form-group {
+      width: 23%;
+      height: 10vh;
+      /* border: 10px solid; */
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 4%;
+      text-align: left;
+    }
+
+    input,
+    select {
+      padding: 1%;
+      border-radius: 0.5em;
+      border: 1% solid #ccc;
+      font-size: 100%;
+      height: 4vh;
+    }
+
+
+    .button-group {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 2%;
+      margin-top: 1%;
+    }
+
+    button {
+      height: 5vh;
+      padding: 1% 1%;
+      font-size: 100%;
+      border: none;
+      border-radius: 0.5em;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button[type="submit"] {
+      background-color: #044182;
+      color: white;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #03376c;
+    }
+
+    button[type="reset"] {
+      background-color: brown;
+      color: white;
+    }
+
+    button[type="reset"]:hover {
+      background-color: darkred;
+    }
+
+    .add_dashboard_button {
+      background-color: #0e70d3;
+      color: #fff;
+      padding: 3%;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      height: 4vh;
+      margin: 1%;
+      transition: background-color 0.3s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .add_dashboard_button:hover {
+      background-color: #095ab1;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .add_dashboard_button:active {
+      background-color: #074a90;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+.invalid-feedback{
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      /* border-color: #6c63ff; */
+      box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+    }
+
+    .form-group input::placeholder,
+    .form-group select::placeholder {
+      color: #999;
+
+}
+
+    @media (max-width: 768px) {
+      .form-group {
+        width: 100%;
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    /* Force select2 width to match parent */
+    .select2-container {
+      width: 100% !important;
+    }
+
+
+/* Basic dropdown styling */
+.normal-dropdown {
+  
+  width: 100%;
+  /* padding: 0.75em; */
+  font-size: 16px;
+  border-radius: 0.5em;
+  /* border: 1px solid #141313; */
+  background-color: white;
+}
+
+/* Additional styles for the input box and dropdown */
+.ng-select .ng-select-container {
+  padding: 0.75em;
+  border-radius: 0.5em;
+  border: 1px solid #ccc;
+}
+
+/* Option hover styling */
+.ng-select .ng-option:hover {
+  background-color: #f1f1f1;
+}
+
+/* Main ng-select container */
+.ng-select {
+  width: 100% !important;
+  font-size: 16px;
+}
+
+/* Input box */
+.ng-select .ng-select-container {
+  border: 2px solid #6c63ff !important;
+  border-radius: 8px;
+  padding: 0.5em;
+  background-color: #f9f9f9;
+}
+
+/* Selected value */
+.ng-select .ng-value {
+  padding: 0.5em;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Dropdown panel */
+.ng-dropdown-panel {
+  border: 2px solid #6c63ff;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background-color: #fff;
+  margin-top: 4px;
+}
+
+/* Dropdown options */
+.ng-dropdown-panel .ng-option {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.ng-dropdown-panel .ng-option:last-child {
+  border-bottom: none;
+}
+
+.ng-dropdown-panel .ng-option:hover {
+  background-color: #f0f0f0;
+  /* border-left: 4px solid #6c63ff; */
+}
+
+/* Search input box */
+.ng-dropdown-panel .ng-select-search input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid #6c63ff;
+  border-radius: 5px;
+}
+

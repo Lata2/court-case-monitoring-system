@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Form</title>
+
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="radio-group">
+            <label><input type="radio" name="type" value="commissionary"> Commissionary</label>
+            <label><input type="radio" name="type" value="directorate"> Directorate</label>
+        </div>
+        <div class="form-group-container">
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department">
+                    <option value="">-- Select --</option>
+                    <option value="finance">Finance</option>
+                    <option value="hr">HR</option>
+                    <option value="it">IT</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="from-date">From</label>
+                <input type="date" id="from-date">
+            </div>
+
+            <div class="form-group">
+                <label for="to-date">To</label>
+                <input type="date" id="to-date">
+            </div>
+            <div class="form-group" >
+                <!-- <label>&nbsp;</label>  -->
+                <button type="submit">Search</button>
+            </div>
+        </div>
+
+      
+    </div>
+
+</body>
+
+</html>

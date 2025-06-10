@@ -1,0 +1,126 @@
+.allot-container {
+   
+    width: 98%;
+    /* border: 1px solid; */
+    margin: 2% auto ;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1%;
+    background-color: #fff;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+  }
+  .allot-heading{
+    border: 1px solid;
+    width: 100%;
+    height: 6.5vh;
+    color: white;
+    background-color: #092c4f;
+    border-radius: 5px;
+  }
+
+  .form-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    margin-top: 1%;
+    border: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 0.5%;
+    /* padding-top: 1%;
+    padding-bottom: 1%; */
+  }
+
+  .form-section label {
+    width: 100%;
+    font-weight: bold;
+    margin-top: 1%;
+  }
+
+  .form-section select,
+  .form-section input {
+    width: 30%;
+    padding: 1%;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .allot-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .allot-table th,
+  .allot-table td {
+    border: 1px solid #ccc;
+    
+    padding: 1%;
+    text-align: center;
+  }
+
+  .allot-table th {
+    /* background-color: #f0f0f0; */
+      background-color: #092c4f;
+      color: white;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1%;
+    margin-top: 1%;
+  }
+
+  .pagination button {
+    padding: 0.5% 1.5%;
+    border: none;
+    background-color: #052d57;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    .form-section select,
+    .form-section input {
+      width: 100%;
+      
+    }
+  }
+  .form-section {
+  display: flex;
+  gap: 2%;
+  margin-bottom: 2%;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 18%; /* Adjust based on how many fields you want per row */
+  min-width: 150px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.form-group select,
+.form-group input {
+  padding: 3%;
+  /* height: 4vh; */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}

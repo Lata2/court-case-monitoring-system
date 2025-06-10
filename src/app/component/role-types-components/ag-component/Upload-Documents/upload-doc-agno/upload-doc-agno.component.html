@@ -1,0 +1,170 @@
+<div class="container">
+  <h1 class="title">Upload Case Detail Document</h1>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <label for="agNo">AG No.</label>
+    <input type="text" id="agNo" [(ngModel)]="agcino" />
+    <button (click)="onSearch()" class="search-button">Search</button>
+  </div>
+
+  <!-- Case Table -->
+  <div class="table-container" *ngIf="caseData; else noRecord">
+    <table>
+      <thead>
+        <tr>
+          <th>Sl.No.</th>
+          <th>AG No.</th>
+          <th>Petitioner Name</th>
+          <th>Petitioner Advocate</th>
+          <th>Respondent Name</th>
+          <th>Law Officer</th>
+          <th>Case Type</th>
+          <th>Subject</th>
+          <th>Date of Receiving</th>
+          <th>Upload File</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>{{ caseData.agcino }}</td>
+          <td>{{ caseData.pet_name }}</td>
+          <td>{{ caseData.pet_adv }}</td>
+          <td>{{ caseData.res_name }}</td>
+          <td>{{ caseData.law_officer }}</td>
+          <td>{{ caseData.case_type }}</td>
+          <td>{{ caseData.subject }}</td>
+          <td>{{ caseData.date_of_receiving | date: 'dd-MM-yyyy' }}</td>
+          <td style="display: flex; justify-content: center; ">
+            <button (click)="showUploadForm = true" mat-icon-button
+                    style="border: none; outline: none; box-shadow: none; background: transparent;">
+              <span class="material-icons" style="color: red;">upload_file</span>
+            </button>
+            <button (click)="openModal()" title="View List"
+                    style="border:none; outline:none; box-shadow:none; background:transparent; cursor:pointer;">
+              <span class="material-icons" style="color: blue; font-size: 24px;">
+                format_list_bulleted
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noRecord>
+    <div *ngIf="searchDone" style="color: red; text-align:center; margin-top:10px;">
+      ⚠️ No record found for AG No: <strong>{{ agcino }}</strong>
+    </div>
+  </ng-template>
+
+  <!-- Upload Form -->
+  <div *ngIf="showUploadForm" class="upload-form">
+    <div class="upload-row">
+      <label>*Document Type</label>
+      <ng-select
+        class="normal-dropdown"
+        [items]="docTypes"
+        bindLabel="docu_name"
+        bindValue="docu_id"
+        placeholder="-- Select Document Type --"
+        [searchable]="true"
+        [clearable]="true"
+        [(ngModel)]="docType"
+        name="docType"
+        (ngModelChange)="docTouched = true"
+        style="width: 300px;"
+      >
+      </ng-select>
+      <label>Upload File:</label>
+      <input type="file" (change)="onFileSelected($event)" accept=".pdf,.jpg,.png,.jpeg" />
+      
+      <div *ngIf="fileTouched && !selectedFile" class="error" style="color: red; margin-top: 4px;">
+        File is required.
+      </div>
+
+      <div *ngIf="filePreviewUrl" style="margin-top: 8px;">
+        <button (click)="viewPdf()" type="button"
+                style="background-color: #267cbd; color: white; padding: 4px 12px; border: none; cursor: pointer;">
+          View
+        </button>
+      </div>
+
+      <label>Remarks</label>
+      <input type="text" [(ngModel)]="remarks" />
+
+      <button class="btn-upload" [disabled]="isUploading" (click)="uploadDocument()">Upload</button>
+      <button class="btn-cancel" (click)="showUploadForm = false">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Uploaded Documents Table -->
+  <div *ngIf="showDocuments">
+    <h3>Uploaded Documents</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Sl No.</th>
+          <th>AG No.</th>
+          <th>Document Sl No.</th>
+          <th>Upload Date</th>
+          <th>Remarks</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!documents || documents.length === 0">
+          <td colspan="7" style="text-align: center; color: red;">No records found</td>
+        </tr>
+        <tr *ngFor="let doc of documents; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ agcino }}</td>
+          <td>{{ doc.docSlno }}</td>
+          <td>{{ doc.uploadDate | date: 'dd-MM-yyyy' }}</td>
+          <td>{{ doc.remarks }}</td>
+          <td>
+            <button (click)="viewDocu(doc)" mat-icon-button
+                    style="border: none; outline: none; box-shadow: none; background: transparent">
+              <span class="material-icons" style="color: blue;">visibility</span>
+            </button>
+
+            <button (click)="deleteDocument(doc)" mat-icon-button
+                    style="color: red; border: none; outline: none; box-shadow: none;">
+              <span class="material-icons">delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <button class="btn-close" (click)="showModal = false">✖</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Party No.</th>
+            <th>Respondent Name</th>
+            <th>District</th>
+            <th>Department</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="!respondentList || respondentList.length === 0">
+            <td colspan="4" style="text-align: center; color: red;">No records found</td>
+          </tr>
+          <tr *ngFor="let res of respondentList">
+            <td>{{ res.party_no }}</td>
+            <td>{{ res.name }}</td>
+            <td>{{ res.dist }}</td>
+            <td>{{ res.concerned_officer }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

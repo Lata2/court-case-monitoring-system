@@ -1,0 +1,17 @@
+.onboarding_form_head {
+    width: 98%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1%;
+    background: #2c3e50;
+    /* background-color:brown; */
+    color: white;
+    height: 8vh;
+  }
+  .onboarding_logo1 {
+    height: 8vh;
+  }
+  
+  .onboarding_logo2 {
+    height: 8vh;
+  }

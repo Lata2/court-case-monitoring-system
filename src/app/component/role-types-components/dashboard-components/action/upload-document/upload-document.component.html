@@ -1,0 +1,171 @@
+<h1>Upload Case Detail Document</h1>
+
+<div class="container">
+  <!-- Search Form -->
+  <div class="add-new-case-form-container" style="width: 97%; height: auto;padding: 1%;">
+    <form [formGroup]="uploadForm" (ngSubmit)="onSearchSubmit()">
+      <div class="form-group">
+        <label for="case_type">Case Nature:</label>
+        <ng-select [items]="caseNatures" bindLabel="case_type" bindValue="case_type_id" formControlName="case_type"
+          placeholder="-- Select Nature --" [searchable]="true" [clearable]="true" class="normal-dropdown">
+          <ng-template ng-label-tmp let-item="item">
+            {{ item.case_type_short_name }} - {{ item.case_type }}
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item">
+            {{ item.case_type_short_name }} - {{ item.case_type }}
+          </ng-template>
+        </ng-select>
+      </div>
+
+      <div class="form-group">
+        <label for="case_no">Case No:</label>
+        <input type="text" id="case_no" formControlName="case_no" maxlength="5" placeholder="Enter Case Number"
+          (keypress)="allowOnlyNumbers($event)"
+          [ngClass]="{'is-invalid': caseNoControl?.touched && caseNoControl?.invalid}" />
+
+        <div class="invalid-feedback" *ngIf="caseNoControl?.touched && caseNoControl?.errors?.['required']">
+          Case number is required.
+        </div>
+        <div class="invalid-feedback" *ngIf="caseNoControl?.touched && caseNoControl?.errors?.['pattern']">
+          Only numbers allowed (no leading 0, max 5 digits).
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="case_year">Case Year:</label>
+        <ng-select [items]="years" bindLabel="year" bindValue="year" formControlName="case_year"
+          placeholder="-- Select Year --" [searchable]="true" [clearable]="true" class="normal-dropdown">
+        </ng-select>
+      </div>
+
+      <div class="button-group">
+        <button type="submit">Search Case</button>
+        <button type="reset" (click)="onReset()">Reset</button>
+      </div>
+    </form>
+  </div>
+  <br>
+
+  <!-- Display Case table only if search was clicked -->
+  <div *ngIf="isSearchClicked">
+    <table class="case-table">
+      <tr>
+        <th>Sl. NO.</th>
+        <th>Case Number</th>
+        <th>CINO</th>
+        <th>Court Type</th>
+        <th>Petitioner Name</th>
+        <th>Respondent Name</th>
+      </tr>
+<!-- 
+     <tr *ngIf="caseDocList.length === 0">
+  <td colspan="7" style="text-align: center;">Record not found</td>
+</tr> -->
+  <tr *ngIf="caseList.length === 0">
+    <td colspan="7" style="text-align: center;">Record not found</td>
+  </tr>
+
+      <tr *ngFor="let caseItem of caseList; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ caseItem.case_no }}</td>
+        <td>{{ caseItem.cino }}</td>
+        <td>{{ caseItem.est_name }}</td>
+        <td>{{ caseItem.pet_name }}</td>
+        <td>{{ caseItem.res_name }}</td>
+      </tr>
+    </table>
+
+    <!-- Upload section -->
+    <form [formGroup]="uploadForm" (ngSubmit)="onUploadSubmit()" enctype="multipart/form-data">
+      <div class="upload-section">
+      <div class="upload-form-group">
+  <label for="document_type">Document Type:</label>
+  <ng-select [items]="caseDocName" bindLabel="docu_name" bindValue="docu_id"
+    formControlName="docu_id"
+    placeholder="-- Select Document Type --"
+    [searchable]="true"
+    [clearable]="true"
+    class="normal-dropdown">
+  </ng-select>
+  <div class="error" *ngIf="uploadForm.get('docu_id')?.touched && uploadForm.get('docu_id')?.invalid">
+    Document Type is required.
+  </div>
+</div>
+
+<div class="upload-form-group">
+  <label for="upload_file">Upload File:</label>
+  <input type="file" (change)="onFileSelected($event)" accept=".pdf,.jpg,.png,.jpeg" />
+  <div class="error" *ngIf="uploadForm.get('upload_file')?.touched && uploadForm.get('upload_file')?.invalid">
+    File is required.
+  </div>
+
+  <!-- View Button (Only show after file is selected) -->
+  <div *ngIf="filePreviewUrl" style="margin-top: 8px; width: fit-content;">
+    <button style="background-color: rgb(38, 124, 189); color: white; padding: 4px 12px; border: none; cursor: pointer; margin-left: 50%;width: 200%;height: 3vh;" type="button" (click)="viewPdf()">
+      View
+    </button>
+  </div>
+</div>
+
+
+
+
+        <div class="upload-form-group">
+          <label for="document_no">Document No.:</label>
+          <input type="text" formControlName="document_no" required />
+        </div>
+
+        <div class="upload-form-group">
+          <label for="document_date">Document Date:</label>
+          <input type="date" formControlName="document_date" required />
+        </div>
+
+        <div class="upload-form-group">
+          <label for="remarks">Remarks:</label>
+          <input type="text" formControlName="remarks" />
+        </div>
+        <!-- <button type="submit" [disabled]="!sessionReady || uploadForm.invalid || !selectedFile">Upload</button> -->
+
+        <button type="submit">Upload</button>
+      </div>
+    </form>
+
+    <!-- Display uploaded documents -->
+   <table class="case-table">
+  <tr>
+    <th>Sl. NO.</th>
+    <th>Document Type</th>
+    <th>Document No.</th>
+    <th>Date</th>
+    <th>Remarks</th>
+    <th>Upload Date</th>
+    <th>Action</th>
+  </tr>
+
+  <tr *ngIf="caseDocList.length === 0">
+    <td colspan="7" style="text-align: center;">Record not found</td>
+  </tr>
+
+ <tr *ngFor="let doc of caseDocList; let i = index">
+  <td>{{ i + 1 }}</td>
+  <td>{{ doc?.name }}</td>
+  <td>{{ doc?.documentNo }}</td>
+  <td>{{ doc?.documentDate | date:'dd-MM-yyyy' }}</td>
+  <td>{{ doc?.remarks }}</td>
+  <td>{{ doc?.uploadDate | date:'dd-MM-yyyy' }}</td>
+  <td>
+    <a [href]="doc?.url" target="_blank" *ngIf="doc?.url">
+      <button class="icon-button view" title="view">
+        view
+      </button>
+    </a>
+
+    <button class="icon-button delete" (click)="onDelete(doc)" title="delete">
+     delete
+    </button>
+  </td>
+</tr>
+</table>
+
+  </div>
+</div>

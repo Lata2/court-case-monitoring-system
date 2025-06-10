@@ -1,0 +1,134 @@
+<h1 class="dashboard_heading">Dashboard</h1>
+
+<div class="dashboard_box_container">
+  <!-- Total Application -->
+  <div class="main_box_container" (click)="navigateToPage()">
+    <div class="box_container">TOTAL APPLICATION
+      <hr>
+      <span>{{ total_petition }}</span>
+    </div>
+    <div class="box_details">
+      <div class="box_detail_value">
+        <span class="box_span">{{ with_case_no }}</span> Petition With Case No.
+      </div>
+      <div class="box_detail_value">
+        <span class="box_span">{{ without_case_no }}</span> Petition Without Case No.
+      </div>
+      <div class="box_detail_value">
+        <span class="box_span">{{ upto_five_days }}</span> Last 5 Days Uploaded
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Cases -->
+  <div class="main_box_container" (click)="navigateToPage()">
+    <div class="box_container" style="background-color: darkgreen;">TOTAL CASES
+      <hr>
+      <span>{{ total_cases }}</span>
+    </div>
+    <div class="box_details">
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: darkgreen;">{{ pending_cases }}</span> Pending Cases
+      </div>
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: darkgreen;">{{ disposed_cases }}</span> Disposed Cases
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Pending -->
+  <div class="main_box_container" (click)="navigateToPage()">
+    <div class="box_container" style="background-color: darkgoldenrod;">TOTAL PENDING
+      <hr>
+      <span>{{ pending_cases }}</span>
+    </div>
+    <div class="box_details">
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: darkgoldenrod;">{{ total_alloted }}</span> OIC Appointed
+      </div>
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: darkgoldenrod;">{{ pending_for_total_alloted }}</span> OIC Not Appointed
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Case Compliance -->
+  <div class="main_box_container" (click)="navigateToPage()">
+    <div class="box_container" style="background-color: brown;">Pending Case Compliance
+      <hr>
+      <span>{{ total_alloted }}</span>
+    </div>
+    <div class="box_details">
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: brown;">{{ reply_filed }}</span> Reply Filed With Case No.
+      </div>
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: brown;">{{ pending_reply_filed }}</span> Reply Not Filed Without Case No.
+      </div>
+    </div>
+  </div>
+
+  <!-- Court Order Compliance -->
+  <div class="main_box_container" (click)="navigateToPage()">
+    <div class="box_container" style="background-color: darkblue;">Court Order Compliance
+      <hr>
+      <span>{{ disposed_cases }}</span>
+    </div>
+    <div class="box_details">
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: darkblue;">{{ court_oerder_compliance_total }}</span> Alloted
+      </div>
+      <div class="box_detail_value">
+        <span class="box_span" style="background-color: darkblue;">{{ court_oerder_compliance_not_alloted }}</span> Not Alloted
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<!-- Calendar Controls -->
+<div class="calendar-header">
+  <select [(ngModel)]="currentYear" (change)="onMonthOrYearChange()">
+    <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
+  </select>
+
+  <select [(ngModel)]="currentMonth" (change)="onMonthOrYearChange()">
+    <option *ngFor="let m of monthNames; let i = index" [ngValue]="i">{{ m }}</option>
+  </select>
+</div>
+
+<!-- Calendar Grid -->
+<div class="calendar-grid">
+  <!-- Weekday headers -->
+  <div *ngFor="let wd of weekdays" class="calendar-cell header">{{ wd }}</div>
+
+  <!-- Calendar days -->
+ <!-- <div *ngFor="let d of daysInMonth"
+     class="calendar-cell"
+     [class.saturday]="isSaturday(d)"
+     [class.sunday]="isSunday(d)"
+     (click)="navigateToDate(d)">
+  <div *ngIf="d">
+    <div>{{ d }}</div>
+   <div *ngIf="getCountForDay(d) > 0" class="count-text">
+  (count={{ getCountForDay(d) }})
+</div>
+  </div>
+</div> -->
+
+<div *ngFor="let d of daysInMonth"
+     class="calendar-cell clickable"
+     [class.saturday]="isSaturday(d)"
+     [class.sunday]="isSunday(d)"
+     (click)="navigateToDate(d)">
+  <div *ngIf="d">
+    <div>{{ d }}</div>
+    <div *ngIf="getCountForDay(d) > 0" class="count-text">
+      (count={{ getCountForDay(d) }})
+    </div>
+  </div>
+</div>
+
+
+</div>

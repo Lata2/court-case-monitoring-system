@@ -1,0 +1,77 @@
+<div class="filter-section">
+  <!-- Search Input -->
+  <input
+    type="text"
+    placeholder="Search by user ID, code, role, session ID"
+    [(ngModel)]="searchText"
+    (input)="onSearchInput()"
+  />
+
+  <!-- Role Filter -->
+  <select [(ngModel)]="roleFilter" (change)="applyFilters()">
+    <option value="">All Roles</option>
+    <option *ngFor="let role of roleTypes" [value]="role">
+      {{ role }}
+    </option>
+  </select>
+
+  <!-- Min Remaining Minutes Filter -->
+  <input
+    type="number"
+    placeholder="Min Remaining Minutes"
+    [(ngModel)]="minMinutes"
+    (input)="applyFilters()"
+  />
+
+  <!-- Max Remaining Minutes Filter -->
+  <input
+    type="number"
+    placeholder="Max Remaining Minutes"
+    [(ngModel)]="maxMinutes"
+    (input)="applyFilters()"
+  />
+
+  <!-- End Date Filter -->
+  <input
+    type="date"
+    [(ngModel)]="endDate"
+    (change)="applyFilters()"
+  />
+</div>
+
+<div *ngIf="loading">Loading sessions...</div>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<div class="menu-table-container" *ngIf="!loading && !errorMessage">
+  <table class="menu-table">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>User Code</th>
+        <th>Role</th>
+        <th>Remaining (min)</th>
+        <th>Session ID</th>
+        <th>Expires At</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let session of filteredSessions">
+        <td>{{ session.user_id }}</td>
+        <td>{{ session.user_code }}</td>
+        <td>{{ session.role_type }}</td>
+        <td>{{ session.remaining_minutes }}</td>
+        <td>{{ session.session_id }}</td>
+        <td>{{ session.expires_at | date: 'medium' }}</td>
+        <td class="action-icons">
+          <button
+            class="terminate-btn"
+            (click)="terminateSession(session.session_id)"
+          >
+            Terminate
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

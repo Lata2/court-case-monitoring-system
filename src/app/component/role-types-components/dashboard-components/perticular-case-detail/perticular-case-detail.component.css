@@ -1,0 +1,99 @@
+.pt-main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
+  padding: 2%;
+  background-color: #f5f7fa;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Row Flex Container */
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%;
+  width: 100%;
+}
+
+/* Card widths */
+.half-width {
+  width: 48%;
+}
+
+.third-width {
+  width: 31.5%;
+}
+
+/* Shared card style */
+.case-card,
+.table-card {
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 1%;
+  padding: 2%;
+  box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.case-card:hover,
+.table-card:hover {
+  transform: translateY(-2%);
+  box-shadow: 0 1% 2% rgba(0, 0, 0, 0.08);
+}
+
+.case-card h2,
+.table-card h2 {
+  font-size: 1rem;
+  color: #a41b1b;
+  margin-bottom: 1%;
+}
+
+.case-info p {
+  font-size: 0.9rem;
+  margin: 0.5% 0;
+  color: #333;
+}
+
+.case-info strong {
+  color: #263238;
+}
+
+.custom-hr {
+  border: none;
+  height: 0.2%;
+  background-color: #e0e0e0;
+  margin: 1% 0;
+  border-radius: 1%;
+}
+
+/* Table styling */
+.table-card {
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+.table-card table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-top: 2%;
+}
+
+.table-card th,
+.table-card td {
+  padding: 1% 1.5%;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table-card th {
+  background-color: #f3f4f6;
+  color: #37474f;
+  font-weight: 600;
+}
+
+.table-card tr:hover {
+  background-color: #fafafa;
+}

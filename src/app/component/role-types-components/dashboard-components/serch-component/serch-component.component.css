@@ -1,0 +1,139 @@
+/* form-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto 2em auto;
+    background-color: #fff;
+    padding: 1.5em 2em;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    border: 10px solid;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.form-group {
+    flex: 1 1 180px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.form-group label {
+    margin-bottom: 0.4em;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.6em 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: rgb(64, 4, 64);
+    box-shadow: 0 0 5px rgba(64, 4, 64, 0.3);
+    outline: none;
+}
+
+.search-button {
+    flex: 0 0 auto;
+    align-self: flex-end;
+}
+
+.search-button button {
+    padding: 0.7em 1.5em;
+    background-color: rgb(10, 72, 10);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+    margin-top: 1.6em;
+}
+
+.search-button button:hover {
+    background-color: #6b1d6b;
+} */
+
+.form-container {
+    margin: 1% auto 1% auto;
+    /* border: 10px solid; */
+    width: 95%;
+    max-width: 1200px;
+    /* margin: 0 auto 2em auto; */
+    background-color: #fff;
+    padding: 1.5em 2em;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.form-group {
+    flex: 1 1 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.4em;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.6em 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: rgb(64, 4, 64);
+    box-shadow: 0 0 5px rgba(64, 4, 64, 0.3);
+    outline: none;
+}
+
+.search-button {
+    flex: 0 0 auto;
+    align-self: flex-end;
+}
+
+.search-button button {
+    padding: 0.7em 1.5em;
+    background-color: rgb(10, 17, 72);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+    margin-top: 1.6em;
+}
+
+.search-button button:hover {
+    background-color: #4510a1;
+}

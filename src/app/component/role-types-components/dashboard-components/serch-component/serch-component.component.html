@@ -1,0 +1,65 @@
+<div class="form-container" [formGroup]="form">
+  <div class="form-row">
+
+    <!-- Case Nature -->
+    <div class="form-group">
+      <label for="case_type">Case Nature:</label>
+      <ng-select [items]="caseNatures || []"
+                 bindLabel="case_type"
+                 bindValue="case_type_id"
+                 formControlName="case_type"
+                 placeholder="-- Select Nature --"
+                 [searchable]="true"
+                 [clearable]="true"
+                 class="normal-dropdown">
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.case_type_short_name }} - {{ item.case_type }}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item">
+          {{ item.case_type_short_name }} - {{ item.case_type }}
+        </ng-template>
+      </ng-select>
+    </div>
+
+    <!-- Case No -->
+    <div class="form-group">
+      <label for="caseNo">Case No:</label>
+      <input type="text" id="caseNo" formControlName="caseNo">
+    </div>
+
+    <!-- Case Year -->
+    <div class="form-group">
+      <label for="case_year">Case Year:</label>
+      <ng-select [items]="years"
+                 bindLabel="year"
+                 bindValue="year"
+                 formControlName="case_year"
+                 placeholder="-- Select Year --"
+                 [searchable]="true"
+                 [clearable]="true"
+                 class="normal-dropdown">
+      </ng-select>
+    </div>
+
+    <!-- Petitioner Name -->
+    <div class="form-group">
+      <label for="petitionerName">Petitioner Name:</label>
+      <input type="text" id="petitionerName" formControlName="petitionerName">
+    </div>
+
+    <!-- Case Type -->
+    <div class="form-group">
+      <label for="type">Case Type:</label>
+      <ng-select [items]="types"
+                 bindLabel="type_name"
+                 bindValue="type_id"
+                 formControlName="type"
+                 placeholder="-- Select Type --"
+                 [searchable]="true"
+                 [clearable]="true"
+                 class="normal-dropdown">
+      </ng-select>
+    </div>
+
+  </div>
+</div>

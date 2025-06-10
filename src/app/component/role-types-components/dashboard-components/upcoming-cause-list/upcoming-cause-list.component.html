@@ -1,0 +1,78 @@
+<h1>Upcoming Cause List Details</h1>
+
+<div class="table-container">
+  <div class="table-controls">
+    <span>Page Size:</span>
+    <select id="pageSize" [(ngModel)]="take" (change)="onPageSizeChange()">
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+
+  <table class="case-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Reg. No<br><hr>Case Status</th>
+        <th>Petitioner<br><hr>Advocate Name</th>
+        <th>Respondent<br><hr>Advocate Name</th>
+        <th>Last Hearing</th>
+        <th>Next Hearing</th>
+        <th>Petition File</th>
+        <th>Assign To</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- 🔄 Loading row -->
+      <tr *ngIf="loadingService.isLoading$ | async">
+        <td colspan="9" style="text-align: center;">
+          <div class="spinner"></div>
+          <div>Loading records, please wait...</div>
+        </td>
+      </tr>
+
+      <!-- ❌ No data -->
+      <tr *ngIf="!(loadingService.isLoading$ | async) && !allotmentList?.data?.length">
+        <td colspan="9" style="text-align: center; color: red;">
+          Records Not Found
+        </td>
+      </tr>
+
+      <!-- ✅ Data rows -->
+      <tr *ngFor="let case of allotmentList.data; let i = index">
+        <td>{{ ((currentPage - 1) * +take) + i + 1 }}</td>
+        <td>
+          <span (click)="navigatePerticularCaseDetails()" style="cursor:pointer;">
+            {{ case?.RegNo }}
+          </span>
+          <br><hr>
+          <span style="background-color: rgb(128, 128, 8); padding: 4%; color: white;">
+            {{ case?.CaseStatus }}
+          </span>
+        </td>
+        <td>{{ case?.petitioner_name }}<br><hr>{{ case?.petitioner_advocate }}</td>
+        <td>{{ case?.respondent_name }}<br><hr>{{ case?.respondent_advocate }}</td>
+        <td>{{ case?.lasthearingdate || 'Date Not Issued' }}</td>
+        <td>{{ case?.nextHearing || 'Date Not Issued' }}</td>
+        <td>{{ case?.petitionFile || '-' }}</td>
+        <td>{{ case?.assignTo || 'Case not Allocated' }}</td>
+        <td class="action-cell">
+          <button class="action-btn history-btn">History</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="record-info">
+    Total Records: {{ totalRecords }}
+  </div>
+
+  <div class="pagination-controls" *ngIf="totalPages() > 1" style="margin-top: 15px; text-align: center;">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span> Page {{ currentPage }} of {{ totalPages() }} </span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()">Next</button>
+  </div>
+</div>

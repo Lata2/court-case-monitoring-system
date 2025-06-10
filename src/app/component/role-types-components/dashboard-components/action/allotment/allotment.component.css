@@ -1,0 +1,83 @@
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    -webkit-text-stroke: 1px rgb(64, 4, 64);
+    color: rgb(76, 72, 72);
+}
+
+.dashboard_box_container {
+    display: flex;
+    flex-wrap: nowrap;
+    /* single row */
+    justify-content: space-evenly;
+    /* align-items: stretch; */
+    padding: 1%;
+
+    /* gap: 1%; */
+    overflow-x: auto;
+    /* horizontal scroll if needed */
+    width: 100%;
+    box-sizing: border-box;
+    /* border: 1px solid; */
+}
+
+.clickable-number {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.box_container {
+    flex: 0 0 18%;
+   width: 25%;
+   height: auto;
+    /* each box takes ~18% width (5 boxes + gaps) */
+    background-color: #ffffff;
+    border-radius: 1em;
+    box-shadow: 0 0.4em 1.2em rgba(0, 0, 0, 0.1);
+    padding: 1%;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* min-width: 180px; */
+    /* ensures boxes don't shrink too much on narrow screens */
+}
+
+.box_container p:first-child {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333333;
+    margin: 0 0 0.5em 0;
+}
+
+.box_container p:last-child {
+    font-size: 2em;
+    font-weight: bold;
+    color: #0077cc;
+    margin: 0;
+}
+
+.box_container:hover {
+    transform: translateY(-3%);
+    box-shadow: 0 0.8em 2em rgba(0, 0, 0, 0.2);
+}
+
+/* in allotment.component.css */
+.clickable-number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #0077cc;
+    margin: 0;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .clickable-number:hover {
+    color: #005999;
+  }
+  

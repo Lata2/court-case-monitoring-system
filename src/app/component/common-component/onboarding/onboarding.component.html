@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="onboarding_main_container">
+    <app-main-header></app-main-header>
+    
+        <!-- <div class="onboarding_nav_container"></div> -->
+        <!-- <div class="onboarding_form_head">
+            <img class="onboarding_logo1" src="https://ccms.cg.gov.in/assets/images/eCourt-india.png" alt="">
+    
+            <h1>Court Case Monitoring System</h1>
+            <img class="onboarding_logo2" src="https://ccms.cg.gov.in/assets/images/govlogo.png" alt="">
+        </div> -->
+        <h2 class="form_heading">CCMS Onboarding Form</h2>
+        <form class="onboarding_form" [formGroup]="onboardingForm" (ngSubmit)="onSubmit()">
+    
+            <h3>Department Details</h3>
+            <div class="dept_details_container">
+                <div style="width: 100%;">
+                    <label for="dept_id">Department Name:</label><br />
+                    <select class="input_box" id="dept_id" formControlName="dept_id"
+                      (change)="onDepartmentChange($event)"
+                      [ngClass]="{'error-border': onboardingForm.get('dept_id')?.invalid && onboardingForm.get('dept_id')?.touched}"
+                      required>
+                      <option value="">--Select Department--</option>
+                      <option *ngFor="let dept of departments" [value]="dept.dept_id">{{ dept.dept_name }}</option>
+                    </select>
+    
+    
+                    <br />
+                    <p *ngIf="onboardingForm.get('dept_name')?.invalid && onboardingForm.get('dept_name')?.touched"
+                        class="error-text">
+                        * Department Name is required.
+                    </p>
+                </div>
+    
+                <div style="width: 100%;">
+                    <!-- <label for="dept_add">Department Address:</label><br /> -->
+                    <label for="dept_add">Department Address:</label><br />
+                    <textarea class="input_box" id="dept_add" formControlName="dept_add"
+                      [ngClass]="{'error-border': onboardingForm.get('dept_add')?.invalid && onboardingForm.get('dept_add')?.touched}"
+                      required>{{ selectedDept?.dept_add }}</textarea>
+                      <br />
+                    <p *ngIf="onboardingForm.get('dept_add')?.invalid && onboardingForm.get('dept_add')?.touched"
+                        class="error-text">
+                        * Department Address is required.
+                    </p>
+                </div>
+            </div>
+    
+            <h3>Nodal Details</h3>
+            <div class="nodal_details_container">
+                <div style="width: 100%;">
+                    <label for="nodal_name">Nodal Name (Class 1 Officer):</label><br />
+                    <input class="input_box" type="text" id="nodal_name" formControlName="nodal_name"
+                        [ngClass]="{'error-border': onboardingForm.get('nodal_name')?.invalid && onboardingForm.get('nodal_name')?.touched}"
+                        required>
+    
+                    <p *ngIf="onboardingForm.get('nodal_name')?.invalid && onboardingForm.get('nodal_name')?.touched"
+                        class="error-text">
+                        * Only alphabets and spaces are allowed.
+                    </p>
+                    <br />
+                </div>
+    
+                <div style="width: 100%;">
+                    <label for="nodal_desg">Nodal Designation :</label><br />
+                    <textarea class="input_box" id="nodal_desg" formControlName="nodal_desg"
+                        [ngClass]="{'error-border': onboardingForm.get('nodal_desg')?.invalid && onboardingForm.get('nodal_desg')?.touched}"
+                        required></textarea><br />
+                    <p *ngIf="onboardingForm.get('nodal_desg')?.invalid && onboardingForm.get('nodal_desg')?.touched"
+                        class="error-text">
+                        * Nodal Designation is required.
+                    </p>
+                </div>
+            </div>
+    
+            <div class="nodal_details_container">
+                <div style="width: 100%;">
+                    <label for="dept_mail">Nodal Email:</label><br />
+                    <input class="input_box" type="text" id="nodal_email" formControlName="nodal_email"
+                        [ngClass]="{'error-border': onboardingForm.get('dept_mail')?.invalid && onboardingForm.get('dept_mail')?.touched}"
+                        required>
+                    <p *ngIf="onboardingForm.get('dept_mail')?.invalid && onboardingForm.get('nodal_email')?.touched"
+                        class="error-text">
+                        * Enter a valid email address.
+                    </p><br />
+                </div>
+    
+                <div style="width: 100%;">
+                    <label for="nodal_no">Nodal Mobile Number (WhatsApp Preferred):</label><br />
+                    <input class="input_box" type="text" id="nodal_no" formControlName="nodal_no"
+                    [ngClass]="{'error-border': onboardingForm.get('nodal_no')?.invalid && onboardingForm.get('nodal_no')?.touched}"
+                    required maxlength="10" (keypress)="restrictInput($event, nodalNo)" (input)="limitDigits($event)"
+                    #nodalNo>
+                
+                <!-- Validation Message -->
+                <p *ngIf="onboardingForm.get('nodal_no')?.errors?.['minlength'] && onboardingForm.get('nodal_no')?.touched"
+                    class="error-text">
+                    * Mobile number must be exactly 10 digits.
+                </p>
+                
+                <p *ngIf="onboardingForm.get('nodal_no')?.errors?.['pattern'] && onboardingForm.get('nodal_no')?.touched"
+                    class="error-text">
+                    * Mobile number must start with 6, 7, 8, or 9.
+                </p>
+                
+                    <br />
+                </div>
+            </div>
+    
+            <!-- File Upload Section (Commented Out) -->
+            <!-- <h3>Letter to SIO: (*Only PDF)</h3>
+            <p><a href="sample.pdf" download>Download Sample PDF</a></p> 
+            <input class="input_box" type="file" id="pdf" name="pdf" accept="application/pdf" > -->
+            <!-- <p *ngIf="fileError" class="error-text">Please upload a valid PDF file.</p> -->
+            <br />
+    
+            <!-- <button class="submit_button" type="submit" [disabled]="onboardingForm.invalid">Submit</button> -->
+            <button class="submit_button" type="submit" [disabled]="onboardingForm.invalid">
+                Submit
+            </button>
+    
+        </form>
+    </div>
+</body>
+</html>

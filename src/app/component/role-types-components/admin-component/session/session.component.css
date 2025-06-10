@@ -1,0 +1,54 @@
+/* session.component.css */
+
+.terminate-btn {
+    background-color: rgb(8, 8, 120);
+    color: white;
+    padding: 6px 12px;
+    margin: 4%;
+    border: 1px solid white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  .terminate-btn:hover {
+    background-color: rgb(111, 70, 201);
+  }
+  
+
+  /* Filter section */
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 1%; */
+  height: auto;
+  padding: 1%;
+  justify-content: space-between;
+  /* margin-bottom: 15px; */
+  /* border: 10px solid #931b1b; */
+}
+
+.filter-section input,
+.filter-section select {
+  padding: 1%;
+  width: 17%;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+
+
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .filter-section {
+    flex-direction: column;
+  }
+
+  .filter-section input,
+  .filter-section select {
+    width: 100%;
+  }
+}

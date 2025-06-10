@@ -1,0 +1,35 @@
+.dashboard_home_heading{
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    -webkit-text-stroke: 1px rgb(64, 4, 64); 
+    color: rgb(76, 72, 72);
+}
+
+.table_main_container{
+    width: 100%;
+    margin: 0 auto;
+}
+.table-container {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+    padding: 1%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+thead {
+    background-color: #342f66;
+    color: white;
+}
+th, td {
+    padding: 0.5% 1%;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: medium;
+}
+
+

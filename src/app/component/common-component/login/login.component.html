@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="login_main_container">
+    <div class="login_header_container"  (click)="goToHome()">Home</div>
+    <br><br>
+    <div class="login_form_container">
+      <div class="login_form_head">
+        <img class="login_logo1" src="https://ccms.cg.gov.in/assets/images/eCourt-india.png" alt="eCourt India">
+        <h1>Court Case Monitoring System</h1>
+        <img class="login_logo2" src="https://ccms.cg.gov.in/assets/images/govlogo.png" alt="Government Logo">
+      </div>
+  
+      <form class="login_form" (ngSubmit)="login()" [formGroup]="loginForm" autocomplete="off">
+        <label for="user_id">Enter Your User ID:</label>
+        <input type="text" id="user_id" formControlName="user_id" required aria-label="User ID">
+        <p *ngIf="loginForm.get('user_id')?.hasError('required') && loginForm.get('user_id')?.touched" style="color: red;">
+          User ID is required.
+        </p>
+    
+        <!-- <label for="password">Enter Your Password:</label>
+        <input type="password" id="password" formControlName="password" required aria-label="Password">
+        <p *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" style="color: red;">
+          Password is required.
+        </p> -->
+
+        <label for="password">Enter Your Password:</label>
+        <div class="password-wrapper">
+          <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            id="password" 
+            formControlName="password" 
+            required 
+            aria-label="Password"
+          >
+          <fa-icon 
+            [icon]="showPassword ?faEye  : faEyeSlash" 
+            (click)="togglePasswordVisibility()" 
+            [title]="showPassword ? 'Hide password' : 'Show password'"
+          ></fa-icon>
+      
+        
+</div>
+
+
+    
+        <label for="captcha">Fill the Captcha: 
+          <span class="captcha-text" style="font-size: x-large; color: BLUE; font-weight: bold;">{{ captchaText }}</span>
+        </label>
+        <input type="text" id="captcha" formControlName="userCaptchaInput" required aria-label="Captcha Input">
+        <p *ngIf="loginForm.get('userCaptchaInput')?.hasError('required') && loginForm.get('userCaptchaInput')?.touched" style="color: red;">
+          Captcha is required.
+        </p>
+    
+        <p *ngIf="errorMessage" style="color: red;" role="alert">{{ errorMessage }}</p>
+    
+        <button type="submit" class="login_submit_button" [disabled]="loginForm.invalid">Submit</button>
+    
+        <p><a href="#" class="reset-password-link">Reset Your Password</a></p>
+      </form>
+    </div>
+    <br><br>
+    <div class="login_form_footer">
+      <p class="login_form_footer_para">
+        Developed and hosted by: National Informatics Centre, Ministry of Electronics & Information Technology, Government of India.
+        Disclaimer: Content and data owned by respective Service Provider Departments, Chhattisgarh Administration.
+        Copyright © 2022 All Rights Reserved. Software Solutions Provided by NIC (CG).
+      </p>
+    </div>
+  </div>
+  
+</body>
+</html>

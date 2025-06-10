@@ -1,0 +1,142 @@
+<div class="advocate-container">
+  <form #advForm="ngForm">
+    <h2>Advocate Details</h2>
+
+    <div class="form-row">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="adv-name">Name <span style="color: red;">*</span></label>
+        <input
+          type="text"
+          id="adv-name"
+          [(ngModel)]="formModel.adv_name"
+          name="adv_name"
+          required
+        />
+      </div>
+
+      <!-- Registration -->
+      <div class="form-group">
+        <label for="adv-reg">Registration No. <span style="color: red;">*</span></label>
+        <input
+          type="text"
+          id="adv-reg"
+          [(ngModel)]="formModel.adv_reg"
+          name="adv_reg"
+          required
+        />
+      </div>
+
+      <!-- Mobile -->
+      <div class="form-group">
+        <label for="adv-mobile">Mobile No.</label>
+        <input
+          type="text"
+          id="adv-mobile"
+          [(ngModel)]="formModel.adv_mobile"
+          name="adv_mobile"
+          maxlength="10"
+          (keypress)="restrictInput($event)"
+          (input)="limitDigits($event)"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="adv-email">Email Id</label>
+        <input
+          type="email"
+          id="adv-email"
+          [(ngModel)]="formModel.email"
+          name="email"
+        />
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-container">
+        <button class="btn update-btn" type="button" (click)="submitForm()">
+          {{ isEditing ? 'Update' : 'Add' }}
+        </button>
+        <button class="btn reset-btn" type="button" (click)="resetForm()">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <!-- Show count -->
+      <div class="show-select">
+        <label for="show-count">Show</label>
+        <select
+          id="show-count"
+          [(ngModel)]="pageSize"
+          name="pageSize"
+          (change)="onPageSizeChange()"
+        >
+          <option *ngFor="let size of [5,10,25,50]" [value]="size">
+            {{ size }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Search -->
+      <div class="search-input">
+        <label for="search-text">Search</label>
+        <input
+          type="text"
+          id="search-text"
+          [(ngModel)]="searchTerm"
+          name="searchTerm"
+          (input)="onSearch()"
+          placeholder="Search..."
+        />
+      </div>
+    </div>
+  </form>
+
+  <!-- Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Advocate Name</th>
+        <th>Reg. No.</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let adv of advocates">
+        <td>{{ adv.adv_code }}</td>
+        <td>{{ adv.adv_name }}</td>
+        <td>{{ adv.adv_reg }}</td>
+        <td>{{ adv.adv_mobile || '-' }}</td>
+        <td>{{ adv.email || '-' }}</td>
+        <td>
+          <button class="edit-btn" (click)="editAdvocate(adv)" aria-label="Edit">
+            <span class="material-icons">edit</span>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="advocates.length === 0">
+        <td colspan="6" class="no-data">No advocates found</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      (click)="onPageChange(currentPage + 1)"
+      [disabled]="currentPage === totalPages || totalPages === 0"
+    >
+      Next
+    </button>
+  </div>
+</div>
